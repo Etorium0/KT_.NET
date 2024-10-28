@@ -1,0 +1,44 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Shop_Maintain.Models.TUser
+
+@{
+    ViewData["Title"] = "Sửa Tài Khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Sửa Tài Khoản</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SuaTaiKhoan">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Username" />
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="LoaiUser" class="control-label"></label>
+                <select asp-for="LoaiUser" class="form-control">
+                    <option value="1" asp-selected="@(Model.LoaiUser == 1)">Admin</option>
+                    <option value="0" asp-selected="@(Model.LoaiUser == 0)">User</option>
+                </select>
+                <span asp-validation-for="LoaiUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <small class="form-text text-muted">Để trống nếu không muốn thay đổi mật khẩu.</small>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cập nhật" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="QuanLyTaiKhoan">Quay lại danh sách tài khoản</a>
+</div>

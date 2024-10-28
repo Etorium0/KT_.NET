@@ -1,0 +1,44 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Shop_Maintain.Models.TUser
+
+@{
+    ViewData["Title"] = "Thêm Tài Khoản Mới";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Thêm Tài Khoản Mới</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ThemTaiKhoanMoi">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoaiUser" class="control-label"></label>
+                <select asp-for="LoaiUser" class="form-control">
+                    <option value="">Chọn loại người dùng</option>
+                    <option value="1">Admin</option>
+                    <option value="0">User</option>
+                </select>
+                <span asp-validation-for="LoaiUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Thêm" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="QuanLyTaiKhoan">Quay lại danh sách tài khoản</a>
+</div>

@@ -1,0 +1,50 @@
+@using Shop_Maintain.Models;
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model X.PagedList.IPagedList<TUser>
+@{
+    ViewData["Title"] = "Quản lý tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h3>Danh sách tài khoản</h3>
+
+<p>
+    <a asp-action="ThemTaiKhoanMoi" class="btn btn-primary">Thêm tài khoản mới</a>
+</p>
+<p>@TempData["Message"]</p>
+
+<table class="table">
+    <thead>
+        <tr class="table-warning">
+            <th>Username</th>
+            <th>Loại User</th>
+            <th>Mật khẩu</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Username</td>
+                <td>@(item.LoaiUser == 1 ? "Admin" : "User")</td>
+                <td>@item.Password</td>
+                <td>
+                    <a asp-action="SuaTaiKhoan" asp-route-username="@item.Username" class="btn btn-warning">Sửa</a> |
+                    <a asp-action="XoaTaiKhoan" asp-route-username="@item.Username" 
+                       class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa tài khoản này?')">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("quanlytaikhoan", new { page = page }),
+    new PagedListRenderOptions()
+    {
+        LiElementClasses = new List<String> { "page-item" },
+        PageClasses = new List<String> { "page-link" }
+    })
